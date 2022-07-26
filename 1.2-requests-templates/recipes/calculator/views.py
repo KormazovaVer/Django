@@ -1,4 +1,6 @@
-from django.shortcuts import render
+from django.shortcuts import render, reverse
+from django.http import HttpResponse
+
 
 DATA = {
     'omlet': {
@@ -28,3 +30,27 @@ DATA = {
 #     'ингредиент2': количество2,
 #   }
 # }
+
+
+def home_view(request, recipe):
+    serving = request.GET.get("servings", "")
+    print(serving)
+
+    if serving:
+        name_recipe = recipe
+        all_recipes = {}
+        for key, value in DATA[name_recipe].items():
+            all_recipes[key] = value * int(serving)
+            DATA[name_recipe].update(all_recipes)
+        name_recipe = recipe
+        context = {
+            "recipe": DATA[name_recipe]
+
+        }
+    else:
+        name_recipe = recipe
+        context = {
+            "recipe": DATA[name_recipe]
+
+        }
+    return render(request, template_name="calculator/index.html", context=context)
