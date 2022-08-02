@@ -1,4 +1,4 @@
-{% extends "base.html" %}
+{{% extends "base.html" %}
 
 {% load static %}
 
@@ -20,7 +20,7 @@
     <div class="content">
       {% for phone in phones %}
         <div class="phone">
-          <a href="{% url 'phone' phone.slug %}">
+          <a href="{% url 'product' phone.slug %}">
             <h3>{{ phone.name }}</h3>
           </a>
           <div class="price">Стоимость: {{ phone.price }} ₽</div>
@@ -30,3 +30,4 @@
     </div>
   </div>
 {% endblock %}
+
